@@ -1,0 +1,101 @@
+﻿<Page
+    x:Class="EncryptStaticData.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:EncryptStaticData"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="White" Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0"
+                BorderThickness="1"
+                BorderBrush="Black"
+                Margin="5"
+                Padding="5">
+            <TextBlock Text="This sample shows how to round trip encrypting clear text, persisting and decrypting back to clear text"
+                       TextWrapping="Wrap"/>
+        </Border>
+        <Border Grid.Row="1"
+                BorderThickness="1"
+                BorderBrush="Black"
+                Margin="5"
+                Padding="5">
+            <StackPanel Orientation="Vertical"
+                        Padding="5">
+                <TextBlock Text="Encrypt clear text and save to local settings file!"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Step 1:"/>
+                    <StackPanel Orientation="Vertical"
+                                Margin="5,0">
+                        <TextBlock Text="Text to encrypt: "
+                               VerticalAlignment="Top"/>
+                        <TextBox Text="Encrypt me!"
+                                 Name="textToEncrypt"
+                                 MinWidth="250"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Step 2:"/>
+                    <StackPanel Orientation="Vertical"
+                                Margin="5,0">
+                        <TextBlock Text="Filename to save encrypted value in: "/>
+                        <TextBox Text="EncryptedValue.txt"
+                             Name="encryptFilename"
+                         Margin="0,5"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal"
+                            Margin="0,5">
+                    <TextBlock Text="Step 3: "/>
+                    <Button Content="Encrypt and Save"
+                            Click="EncryptAndSave"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Step 4: "/>
+                    <Button Content="View file"
+                            Name="viewFileButton"
+                            Click="ViewFile"
+                            IsEnabled="False"/>
+                    <Button Content="Open folder"
+                            Click="OpenFolder"
+                            Margin="5,0"/>
+                </StackPanel>
+            </StackPanel>
+
+        </Border>
+        <Border Grid.Row="2"
+                BorderThickness="1"
+                BorderBrush="Black"
+                Margin="5"
+                Padding="5">
+            <StackPanel Orientation="Vertical"
+                        Padding="5">
+                <TextBlock Text="Read encrypted text from the file and decrypt!"/>
+                <StackPanel Orientation="Horizontal"
+                            Margin="0,5">
+                    <TextBlock Text="Step 1:"/>
+                    <Button Content="Read and Decrypt"                                
+                            Click="ReadAndDecrypt"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"
+                            Margin="0,5">
+                    <TextBlock Text="Clear text:"/>
+                    <TextBlock Name="ClearTextBlock"
+                               Margin="5,0"
+                               MinWidth="250"/>
+                </StackPanel>
+            </StackPanel>
+
+        </Border>
+
+
+    </Grid>
+</Page>
