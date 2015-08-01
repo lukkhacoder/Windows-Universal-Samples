@@ -1,0 +1,113 @@
+﻿<Page
+    x:Class="Lukkhacoder.UniversalWindowsSamples.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Lukkhacoder.UniversalWindowsSamples"
+    xmlns:converters="using:Lukkhacoder.UniversalWindowsSamples.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <converters:DateTimeOffsetToStringConverter x:Key="DateTimeOffsetConverter"/>
+        <converters:DisplayModeToStringConverter x:Key="DisplayModeConverter"/>
+    </Page.Resources>    
+
+    <StackPanel Name="RootStackPanel"
+                Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+                Orientation="Horizontal">
+        
+        <CalendarView Name="MyCalendarView"
+                      Margin="20"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Top"
+                      SelectedDatesChanged="MyCalendarView_SelectedDatesChanged"
+                      CalendarViewDayItemChanging="MyCalendarView_CalendarViewDayItemChanging"
+                      SelectionMode="Multiple"
+                      IsOutOfScopeEnabled="False"/>
+        <StackPanel Orientation="Vertical"
+                    Margin="20"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Left">
+            <StackPanel.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Margin" Value="10,5"/>
+                </Style>
+            </StackPanel.Resources>
+            
+            <StackPanel Orientation="Horizontal"
+                        Name="SelectedDateStackPanel">
+                <TextBlock Text="SelectedDates.FirstOrDefault(): " />
+                <TextBlock Text="{Binding FirstSelectedDate, Mode=TwoWay, Converter={StaticResource DateTimeOffsetConverter}}"/>
+
+                <StackPanel.Resources>
+                    <Storyboard x:Name="SelectedDateAnimation">
+                        <ColorAnimation Storyboard.TargetName="SelectedDateStackPanel"
+                                        Storyboard.TargetProperty="(StackPanel.Background).(SolidColorBrush.Color)"
+                                        Duration="0:0:0.250"
+                                        AutoReverse="True"
+                                        To="Red"/>
+                    </Storyboard>
+                </StackPanel.Resources>
+                <StackPanel.Background>
+                    <SolidColorBrush/>
+                </StackPanel.Background>
+
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"
+                        Name="SelectedDatesCountStackPanel">
+                <TextBlock Text="SelectedDates.Count:" />
+                <TextBlock Text="{Binding SelectedDatesCount}"/>
+
+                <StackPanel.Resources>
+                    <Storyboard x:Name="SelectedDatesCountAnimation">
+                        <ColorAnimation Storyboard.TargetName="SelectedDatesCountStackPanel"
+                                        Storyboard.TargetProperty="(StackPanel.Background).(SolidColorBrush.Color)"
+                                        Duration="0:0:0.250"
+                                        AutoReverse="True"
+                                        To="Red"/>
+                    </Storyboard>
+                </StackPanel.Resources>
+                <StackPanel.Background>
+                    <SolidColorBrush/>
+                </StackPanel.Background>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Calendar Mode: "/>
+                <ComboBox SelectedItem="{Binding ElementName=MyCalendarView, Path=DisplayMode, Mode=TwoWay, Converter={StaticResource DisplayModeConverter}}"
+                          MinWidth="100">
+                    <x:String>Month</x:String>
+                    <x:String>Year</x:String>
+                    <x:String>Decade</x:String>
+                </ComboBox>
+
+
+
+            </StackPanel>
+        </StackPanel>
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="Layout">
+                <VisualState x:Name="PhoneLayout">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="RootStackPanel.Orientation" Value="Vertical"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="TabletLayout">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="800"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="RootStackPanel.Orientation" Value="Horizontal"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+    </StackPanel>
+    
+</Page>
