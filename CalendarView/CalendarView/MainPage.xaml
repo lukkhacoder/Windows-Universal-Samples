@@ -11,6 +11,7 @@
     <Page.Resources>
         <converters:DateTimeOffsetToStringConverter x:Key="DateTimeOffsetConverter"/>
         <converters:DisplayModeToStringConverter x:Key="DisplayModeConverter"/>
+        <converters:BoolToStringConverter x:Key="BoolConverter"/>
     </Page.Resources>    
 
     <StackPanel Name="RootStackPanel"
@@ -23,8 +24,7 @@
                       VerticalAlignment="Top"
                       SelectedDatesChanged="MyCalendarView_SelectedDatesChanged"
                       CalendarViewDayItemChanging="MyCalendarView_CalendarViewDayItemChanging"
-                      SelectionMode="Multiple"
-                      IsOutOfScopeEnabled="False"/>
+                      SelectionMode="Multiple"/>
         <StackPanel Orientation="Vertical"
                     Margin="20"
                     VerticalAlignment="Top"
@@ -32,6 +32,9 @@
             <StackPanel.Resources>
                 <Style TargetType="TextBlock">
                     <Setter Property="Margin" Value="10,5"/>
+                </Style>
+                <Style TargetType="StackPanel">
+                    <Setter Property="Margin" Value="10,2"/>
                 </Style>
             </StackPanel.Resources>
             
@@ -66,6 +69,7 @@
                                         Duration="0:0:0.250"
                                         AutoReverse="True"
                                         To="Red"/>
+                        
                     </Storyboard>
                 </StackPanel.Resources>
                 <StackPanel.Background>
@@ -81,9 +85,14 @@
                     <x:String>Year</x:String>
                     <x:String>Decade</x:String>
                 </ComboBox>
-
-
-
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="IsOutOfScopeEnabled: "/>
+                <ComboBox SelectedItem="{Binding ElementName=MyCalendarView, Path=IsOutOfScopeEnabled, Mode=TwoWay, Converter={StaticResource BoolConverter}}"
+                          MinWidth="100">
+                    <x:String>True</x:String>
+                    <x:String>False</x:String>
+                </ComboBox>
             </StackPanel>
         </StackPanel>
 

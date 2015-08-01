@@ -96,6 +96,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\BoolToStringConverter.cs" />
     <Compile Include="Converters\DateTimeOffsetToStringConverter.cs" />
     <Compile Include="Converters\DisplayModeToStringConverter.cs" />
     <Compile Include="MainPage.xaml.cs">
